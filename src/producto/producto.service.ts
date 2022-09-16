@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   BusinessError,
   BusinessLogicException,
-} from 'src/shared/errors/business-errors';
+} from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { ProductoEntity } from './producto.entity';
 
@@ -15,13 +15,13 @@ export class ProductoService {
   ) {}
 
   async findAll(): Promise<ProductoEntity[]> {
-    return await this.productoRepository.find({ relations: ['tiendas'] });
+    return await this.productoRepository.find({ relations: ['tienda'] });
   }
 
   async findOne(id: string): Promise<ProductoEntity> {
     const producto: ProductoEntity = await this.productoRepository.findOne({
       where: { id },
-      relations: ['tiendas'],
+      relations: ['tienda'],
     });
     if (!producto) {
       throw new BusinessLogicException(
@@ -37,9 +37,10 @@ export class ProductoService {
   }
 
   async update(id: string, producto: ProductoEntity): Promise<ProductoEntity> {
-    const productoEncontrado: ProductoEntity = await this.productoRepository.findOne({
-      where: { id },
-    });
+    const productoEncontrado: ProductoEntity =
+      await this.productoRepository.findOne({
+        where: { id },
+      });
     if (!productoEncontrado) {
       throw new BusinessLogicException(
         `No existe el producto con id ${id}`,
@@ -52,10 +53,11 @@ export class ProductoService {
     });
   }
 
-    async delete(id: string): Promise<ProductoEntity> {
-    const productoEncontrado: ProductoEntity = await this.productoRepository.findOne({
-      where: { id },
-    });
+  async delete(id: string): Promise<ProductoEntity> {
+    const productoEncontrado: ProductoEntity =
+      await this.productoRepository.findOne({
+        where: { id },
+      });
     if (!productoEncontrado) {
       throw new BusinessLogicException(
         `No existe el producto con id ${id}`,
