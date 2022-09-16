@@ -6,6 +6,7 @@ import { ProductoEntity } from './producto/producto.entity';
 import { ProductoModule } from './producto/producto.module';
 import { TiendaEntity } from './tienda/tienda.entity';
 import { TiendaModule } from './tienda/tienda.module';
+import { TiendaProductoModule } from './tienda-producto/tienda-producto.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TiendaModule } from './tienda/tienda.module';
       synchronize: true,
       keepConnectionAlive: true,
     }),
+    TiendaProductoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
