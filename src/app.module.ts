@@ -6,7 +6,6 @@ import { ProductoEntity } from './producto/producto.entity';
 import { ProductoModule } from './producto/producto.module';
 import { TiendaEntity } from './tienda/tienda.entity';
 import { TiendaModule } from './tienda/tienda.module';
-import { TiendaProductoModule } from './tienda-producto/tienda-producto.module';
 
 @Module({
   imports: [
@@ -17,14 +16,13 @@ import { TiendaProductoModule } from './tienda-producto/tienda-producto.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'postgres',
+      password: 'betunala23',
       database: 'parcial',
       entities: [ProductoEntity, TiendaEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
     }),
-    TiendaProductoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

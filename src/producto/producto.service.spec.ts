@@ -10,20 +10,8 @@ import { TiendaEntity } from '../tienda/tienda.entity';
 describe('ProductoService', () => {
   let service: ProductoService;
   let repository: Repository<ProductoEntity>;
-  let productosList;
+  let productosList: ProductoEntity[];
 
-  const seedData = async () => {
-    repository.clear();
-    productosList = [];
-    for (let i = 0; i < 10; i++) {
-      const producto: ProductoEntity = await repository.save({
-        nombre: faker.commerce.productName(),
-        precio: faker.commerce.price(),
-        tipo: faker.commerce.productMaterial(),
-      });
-      productosList.push(producto);
-    }
-  };
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [...TypeOrmTestingConfig()],
@@ -34,18 +22,30 @@ describe('ProductoService', () => {
     repository = module.get<Repository<ProductoEntity>>(
       getRepositoryToken(ProductoEntity),
     );
-
-    await seedData();
+    await seedDatabase();
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
+  const seedDatabase = async () => {
+    repository.clear();
+    productosList = [];
+    for (let i = 0; i < 5; i++) {
+      const product: ProductoEntity = await repository.save({
+        nombre: faker.commerce.productName(),
+        precio: faker.commerce.price(),
+        tipo: 'perecedero',
+      });
+      productosList.push(product);
+    }
+  };
+
   it('should find all', async () => {
     const productos: ProductoEntity[] = await service.findAll();
     expect(productos).not.toBeNull();
-    expect(productos.length).toBe(10);
+    expect(productos.length).toBe(5);
   });
 
   it('should find one', async () => {
@@ -54,13 +54,20 @@ describe('ProductoService', () => {
     expect(producto.id).toBe(productosList[0].id);
   });
 
+  it('findone should throw an exception for and invalid product', async () => {
+    await expect(() => service.findOne('0')).rejects.toHaveProperty(
+      'message',
+      'No existe el producto con id 0',
+    );
+  });
+
   it('should create', async () => {
     const producto: ProductoEntity = await service.create({
       nombre: faker.commerce.productName(),
       precio: faker.commerce.price(),
-      tipo: faker.commerce.productMaterial(),
+      tipo: 'no perecedero',
       id: '',
-      tienda: new TiendaEntity
+      tiendas: [],
     });
     expect(producto).not.toBeNull();
   });
@@ -69,15 +76,38 @@ describe('ProductoService', () => {
     const producto: ProductoEntity = await service.update(productosList[0].id, {
       nombre: faker.commerce.productName(),
       precio: faker.commerce.price(),
-      tipo: faker.commerce.productMaterial(),
+      tipo: 'perecedero',
       id: '',
-      tienda: new TiendaEntity
+      tiendas: [],
     });
     expect(producto).not.toBeNull();
+  });
+
+  it('update should throw an exception for and invalid product', async () => {
+    let producto: ProductoEntity = productosList[0];
+    producto = {
+      ...producto,
+      nombre: faker.commerce.productName(),
+      precio: faker.commerce.price(),
+      tipo: 'perecedero',
+      id: '',
+      tiendas: [],
+    };
+    await expect(() => service.update('0', producto)).rejects.toHaveProperty(
+      'message',
+      'No se puede crear un producto de undefined',
+    );
   });
 
   it('should delete', async () => {
     const producto: ProductoEntity = await service.delete(productosList[0].id);
     expect(producto).not.toBeNull();
+  });
+
+  it('delete should throw an exception for and invalid product', async () => {
+    await expect(() => service.delete('0')).rejects.toHaveProperty(
+      'message',
+      'No existe el producto con id 0',
+    );
   });
 });
