@@ -33,6 +33,13 @@ export class ProductoService {
   }
 
   async create(producto: ProductoEntity): Promise<ProductoEntity> {
+    const { tipo } = producto || {};
+    if (tipo !== 'perecedero' && tipo !== 'no perecedero') {
+      throw new BusinessLogicException(
+        `No se puede crear un producto de ${tipo}`,
+        BusinessError.BAD_REQUEST,
+      );
+    }
     return await this.productoRepository.save(producto);
   }
 
@@ -41,6 +48,13 @@ export class ProductoService {
       await this.productoRepository.findOne({
         where: { id },
       });
+    const { tipo } = productoEncontrado || {};
+    if (tipo !== 'perecedero' && tipo !== 'no perecedero') {
+      throw new BusinessLogicException(
+        `No se puede crear un producto de ${tipo}`,
+        BusinessError.BAD_REQUEST,
+      );
+    }
     if (!productoEncontrado) {
       throw new BusinessLogicException(
         `No existe el producto con id ${id}`,
