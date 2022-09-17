@@ -43,7 +43,7 @@ export class ProductoTiendaService {
 
 
     producto.tiendas = [...producto.tiendas, tienda];
-    await this.productoRepository.save(producto);
+    return await this.productoRepository.save(producto);
   }
 
   async findStoresFromProduct(productId: string) {
@@ -130,7 +130,10 @@ export class ProductoTiendaService {
       );
     }
 
-    const tienda = producto.tiendas.find((tienda) => tienda.id === storeId);
+    const tienda = await this.tiendaRepository.findOne({
+      where: { id: storeId },
+    });
+
 
     if (!tienda) {
       throw new BusinessLogicException(
@@ -139,9 +142,17 @@ export class ProductoTiendaService {
       );
     }
 
+    const productoTienda = producto.tiendas.find((e) => e.id === tienda.id);
+    if(!productoTienda){
+      throw new BusinessLogicException(
+        `No existe una tienda con el id ${storeId} para el producto con id ${productId}`,
+        BusinessError.NOT_FOUND,
+      );
+    }
+
     producto.tiendas = producto.tiendas.filter(
-      (tienda) => tienda.id !== storeId,
+      (e) => e.id !== storeId,
     );
-    return await this.productoRepository.save(producto);
+    await this.productoRepository.save(producto);
   }
 }
