@@ -38,36 +38,36 @@ export class ProductoTiendaController {
 
   @Get(':productoId/stores/:tiendaId')
   async findStoreFromProduct(
-    @Param('tiendaId') tiendaId: string,
-    @Param('productoId') productoId: string,
+    @Param('tiendaId') storeId: string,
+    @Param('productoId') productId: string,
   ) {
     return await this.productoTiendaService.findStoreFromProduct(
-      tiendaId,
-      productoId,
+      productId,
+      storeId,
     );
   }
 
-  @Put(':productoId/stores/:tiendaId')
+  @Put(':productoId/stores')
   async updateProductFromStore(
     @Body() tiendaDto: TiendaDto[],
-    @Param('productoId') productoId: string,
+    @Param('productoId') productId: string,
   ) {
     const tiendas = plainToInstance(TiendaEntity, tiendaDto);
     return await this.productoTiendaService.updateStoresFromProduct(
-      productoId,
+      productId,
       tiendas,
     );
   }
 
-  @Delete(':productoId/stores/:tienId')
+  @Delete(':productoId/stores/:tiendaId')
   @HttpCode(204)
   async deleteProductFromStore(
-    @Param('tiendaId') tiendaId: string,
-    @Param('productoId') productoId: string,
+    @Param('tiendaId') storeId: string,
+    @Param('productoId') productId: string,
   ) {
     return await this.productoTiendaService.deleteStoreFromProduct(
-      tiendaId,
-      productoId,
+      productId,
+      storeId,
     );
   }
 }

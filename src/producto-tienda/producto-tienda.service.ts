@@ -106,7 +106,7 @@ export class ProductoTiendaService {
 
       if (!tienda) {
         throw new BusinessLogicException(
-          `No existe una tienda con el id ${tiendas[i]}`,
+          `No existe una tienda con el id ${tiendas[i].id}`,
           BusinessError.NOT_FOUND,
         );
       }

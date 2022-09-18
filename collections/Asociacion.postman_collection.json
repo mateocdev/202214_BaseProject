@@ -1,0 +1,792 @@
+{
+	"info": {
+		"_postman_id": "62d3f475-a88e-4337-a27c-e89791aa8051",
+		"name": "Asociacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23045219"
+	},
+	"item": [
+		{
+			"name": "Agregar una nueva tienda a las oferentes de un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Exito\",\n    \"ciudad\": \"BOG\",\n    \"direccion\": \"Colina campestre\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/7ce0387a-077f-4f31-b935-baa90806fa56/stores/9d5168a5-e7ff-42e2-88e5-4b60791a6248",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"7ce0387a-077f-4f31-b935-baa90806fa56",
+						"stores",
+						"9d5168a5-e7ff-42e2-88e5-4b60791a6248"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Agregar una nueva tienda a las oferentes de un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/f64491ab-265e-4a03-bbf0-6004d5abdb95/stores/717b19f6-2613-4d17-9fdd-ec4418153e7c",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"f64491ab-265e-4a03-bbf0-6004d5abdb95",
+								"stores",
+								"717b19f6-2613-4d17-9fdd-ec4418153e7c"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"f64491ab-265e-4a03-bbf0-6004d5abdb95\",\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\",\n    \"tiendas\": [\n        {\n            \"id\": \"717b19f6-2613-4d17-9fdd-ec4418153e7c\",\n            \"nombre\": \"Exito\",\n            \"ciudad\": \"BOG\",\n            \"direccion\": \"Colina campestre\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Asociar una tienda que no existe a las oferentes de un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Exito\",\n    \"ciudad\": \"BOGOTA\",\n    \"direccion\": \"Colina campestre\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/f64491ab-265e-4a03-bbf0-6004d5abdb95/stores/717b19f6-2613-4d17-9fdd-ec4418153e79",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"f64491ab-265e-4a03-bbf0-6004d5abdb95",
+						"stores",
+						"717b19f6-2613-4d17-9fdd-ec4418153e79"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Asociar una tienda que no existe a las oferentes de un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/f64491ab-265e-4a03-bbf0-6004d5abdb95/stores/717b19f6-2613-4d17-9fdd-ec4418153e79",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"f64491ab-265e-4a03-bbf0-6004d5abdb95",
+								"stores",
+								"717b19f6-2613-4d17-9fdd-ec4418153e79"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No existe una tienda con el id 717b19f6-2613-4d17-9fdd-ec4418153e79\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las tiendas que ofrecen un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of products > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/07f0aaef-23a6-45e0-9e1f-a9690528f839/stores",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"07f0aaef-23a6-45e0-9e1f-a9690528f839",
+						"stores"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las tiendas que ofrecen un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/f64491ab-265e-4a03-bbf0-6004d5abdb95/stores",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"f64491ab-265e-4a03-bbf0-6004d5abdb95",
+								"stores"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"717b19f6-2613-4d17-9fdd-ec4418153e7c\",\n        \"nombre\": \"Exito\",\n        \"ciudad\": \"BOG\",\n        \"direccion\": \"Colina campestre\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener una tienda que ofrece un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/697ac652-cc5d-4411-9e42-b619d30735bb/stores/794ee599-d7b8-4f05-b68f-6e57ae496747",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"697ac652-cc5d-4411-9e42-b619d30735bb",
+						"stores",
+						"794ee599-d7b8-4f05-b68f-6e57ae496747"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una tienda que ofrece un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/697ac652-cc5d-4411-9e42-b619d30735bb/stores/794ee599-d7b8-4f05-b68f-6e57ae496747",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"697ac652-cc5d-4411-9e42-b619d30735bb",
+								"stores",
+								"794ee599-d7b8-4f05-b68f-6e57ae496747"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"794ee599-d7b8-4f05-b68f-6e57ae496747\",\n    \"nombre\": \"Exito\",\n    \"ciudad\": \"BOG\",\n    \"direccion\": \"Colina campestre\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una tienda que ofrece un producto que no existe.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"No existe una tienda con el id 794ee599-d7b8-4f05-b68f-6e57ae496748 para el producto con id 697ac652-cc5d-4411-9e42-b619d30735bb\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/697ac652-cc5d-4411-9e42-b619d30735bb/stores/794ee599-d7b8-4f05-b68f-6e57ae496748",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"697ac652-cc5d-4411-9e42-b619d30735bb",
+						"stores",
+						"794ee599-d7b8-4f05-b68f-6e57ae496748"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una tienda que ofrece un producto que no existe.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stores/b11c749d-fe12-4745-85fe-eed188f55000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stores",
+								"b11c749d-fe12-4745-85fe-eed188f55000"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No existe una tienda con el id 794ee599-d7b8-4f05-b68f-6e57ae496748 para el producto con id 697ac652-cc5d-4411-9e42-b619d30735bb\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar las tiendas que ofrecen un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Exito\",\n    \"ciudad\": \"BOG\",\n    \"direccion\": \"Colina campestre\",\n    \"id\": \"62a5a474-e791-45ea-b4b7-6a4b0f62f0c1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/07f0aaef-23a6-45e0-9e1f-a9690528f839/stores",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"07f0aaef-23a6-45e0-9e1f-a9690528f839",
+						"stores"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar las tiendas que ofrecen un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/07f0aaef-23a6-45e0-9e1f-a9690528f839/stores",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"07f0aaef-23a6-45e0-9e1f-a9690528f839",
+								"stores"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"07f0aaef-23a6-45e0-9e1f-a9690528f839\",\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\",\n    \"tiendas\": {\n        \"nombre\": \"Exito\",\n        \"ciudad\": \"BOG\",\n        \"direccion\": \"Colina campestre\",\n        \"id\": \"62a5a474-e791-45ea-b4b7-6a4b0f62f0c1\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar las tiendas que ofrecen un producto, con una tienda inexistente.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"No se puede crear un producto de undefined\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Exito\",\n    \"ciudad\": \"BOG\",\n    \"direccion\": \"Colina campestre\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/07f0aaef-23a6-45e0-9e1f-a9690598f839/stores",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"07f0aaef-23a6-45e0-9e1f-a9690598f839",
+						"stores"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar las tiendas que ofrecen un producto, con una tienda inexistente.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/07f0aaef-23a6-45e0-9e1f-a9690528f839/stores",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"07f0aaef-23a6-45e0-9e1f-a9690528f839",
+								"stores"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No existe un producto con el id 07f0aaef-23a6-45e0-9e1f-a9690598f839\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar una tienda que ofrece un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/7ce0387a-077f-4f31-b935-baa90806fa56/stores/9d5168a5-e7ff-42e2-88e5-4b60791a6248",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"7ce0387a-077f-4f31-b935-baa90806fa56",
+						"stores",
+						"9d5168a5-e7ff-42e2-88e5-4b60791a6248"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una tienda que ofrece un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/697ac652-cc5d-4411-9e42-b619d30735bb/stores/794ee599-d7b8-4f05-b68f-6e57ae496748",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"697ac652-cc5d-4411-9e42-b619d30735bb",
+								"stores",
+								"794ee599-d7b8-4f05-b68f-6e57ae496748"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Eliminar una tienda que no ofrece un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/697ac652-cc5d-4411-9e42-b619d30735bb/stores/794ee599-d7b8-4f05-b68f-6e57ae496748",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"697ac652-cc5d-4411-9e42-b619d30735bb",
+						"stores",
+						"794ee599-d7b8-4f05-b68f-6e57ae496748"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una tienda que no ofrece un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/697ac652-cc5d-4411-9e42-b619d30735bb/stores/794ee599-d7b8-4f05-b68f-6e57ae496748",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"697ac652-cc5d-4411-9e42-b619d30735bb",
+								"stores",
+								"794ee599-d7b8-4f05-b68f-6e57ae496748"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No existe una tienda con el id 697ac652-cc5d-4411-9e42-b619d30735bb para el producto con id undefined\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}
