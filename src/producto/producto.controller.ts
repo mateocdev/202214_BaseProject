@@ -25,9 +25,10 @@ export class ProductoController {
     return await this.productoService.findAll();
   }
 
-  @Get(':productId')
-  async findOne(productId: string) {
-    return await this.productoService.findOne(productId);
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    console.log('id desde controlador', id);
+    return await this.productoService.findOne(id);
   }
 
   @Post()

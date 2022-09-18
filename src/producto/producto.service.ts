@@ -23,6 +23,8 @@ export class ProductoService {
       where: { id },
       relations: ['tiendas'],
     });
+    console.log(id);
+
     if (!producto) {
       throw new BusinessLogicException(
         `No existe el producto con id ${id}`,
