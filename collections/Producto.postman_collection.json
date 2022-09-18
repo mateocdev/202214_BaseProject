@@ -1,0 +1,799 @@
+{
+	"info": {
+		"_postman_id": "ffc93275-52cb-4c30-9197-4c334f48ef45",
+		"name": "Producto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23045219"
+	},
+	"item": [
+		{
+			"name": "Crear un producto valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"producto_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un producto valido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\",\n    \"id\": \"e53e7002-6ed3-4f25-8849-3485050c78ba\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un producto inválido.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"producto_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un producto inválido.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": [\n        \"tipo should not be empty\",\n        \"tipo must be a string\"\n    ],\n    \"error\": \"Bad Request\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los productos.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of products > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los productos.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"b11c749d-fe12-4745-85fe-eed188f55000\",\n        \"nombre\": \"monster\",\n        \"precio\": \"$6.500\",\n        \"tipo\": \"no perecedero\",\n        \"tiendas\": []\n    },\n    {\n        \"id\": \"e53e7002-6ed3-4f25-8849-3485050c78ba\",\n        \"nombre\": \"monster\",\n        \"precio\": \"$6.500\",\n        \"tipo\": \"no perecedero\",\n        \"tiendas\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener un producto por ID.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/f9c1d17b-64d5-4b92-82ac-5e3ec283e9e8",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"f9c1d17b-64d5-4b92-82ac-5e3ec283e9e8"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por ID.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/b11c749d-fe12-4745-85fe-eed188f55000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"b11c749d-fe12-4745-85fe-eed188f55000"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"b11c749d-fe12-4745-85fe-eed188f55000\",\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\",\n    \"tiendas\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un producto por un ID que no existe.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"No existe el producto con id 5797ea61-6243-4573-a4eb-cfc2f9608460\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/5797ea61-6243-4573-a4eb-cfc2f9608460",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"5797ea61-6243-4573-a4eb-cfc2f9608460"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por un ID que no existe.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/b11c749d-fe12-4745-85fe-eed188f55000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"b11c749d-fe12-4745-85fe-eed188f55000"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"b11c749d-fe12-4745-85fe-eed188f55000\",\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\",\n    \"tiendas\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"redbull\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/f9c1d17b-64d5-4b92-82ac-5e3ec283e9e8",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"f9c1d17b-64d5-4b92-82ac-5e3ec283e9e8"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un producto.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/b11c749d-fe12-4745-85fe-eed188f55000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"b11c749d-fe12-4745-85fe-eed188f55000"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"f9c1d17b-64d5-4b92-82ac-5e3ec283e9e8\",\n    \"nombre\": \"redbull\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un producto con un ID que no existe.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"No se puede crear un producto de undefined\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"redbull\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/f9c1d17b-64d5-4b92-82ac-5e3ec283e9e3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"f9c1d17b-64d5-4b92-82ac-5e3ec283e9e3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un producto con un ID que no existe.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/b11c749d-fe12-4745-85fe-eed188f55000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"b11c749d-fe12-4745-85fe-eed188f55000"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": \"No se puede crear un producto de undefined\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un producto por su ID.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/f9c1d17b-64d5-4b92-82ac-5e3ec283e9e8",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"f9c1d17b-64d5-4b92-82ac-5e3ec283e9e8"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un producto por su ID.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"monster\",\n    \"precio\": \"$6.500\",\n    \"tipo\": \"no perecedero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/b11c749d-fe12-4745-85fe-eed188f55000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"b11c749d-fe12-4745-85fe-eed188f55000"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Eliminar un producto con un ID que no existe.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/f9c1d17b-64d5-4b92-82ac-5e3ec283e9e3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"f9c1d17b-64d5-4b92-82ac-5e3ec283e9e3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un producto con un ID que no existe.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/b11c749d-fe12-4745-85fe-eed188f55000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"b11c749d-fe12-4745-85fe-eed188f55000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No existe el producto con id f9c1d17b-64d5-4b92-82ac-5e3ec283e9e3\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}
