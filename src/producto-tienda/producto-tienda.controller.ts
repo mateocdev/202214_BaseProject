@@ -1,4 +1,5 @@
 import {
+    Body,
   Controller,
   Delete,
   Get,
@@ -10,6 +11,9 @@ import {
 } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors.interceptor';
 import { ProductoTiendaService } from './producto-tienda.service';
+import { TiendaDto } from '../tienda/tienda.dto';
+import { TiendaEntity } from '../tienda/tienda.entity';
+import { plainToInstance } from 'class-transformer';
 
 @Controller('products')
 @UseInterceptors(BusinessErrorsInterceptor)
@@ -21,7 +25,7 @@ export class ProductoTiendaController {
     @Param('productoId') productoId: string,
     @Param('tiendaId') tiendaId: string,
   ) {
-    return await this.productoTiendaService.addProductToStore(
+    return await this.productoTiendaService.addStoreToProduct(
       productoId,
       tiendaId,
     );
@@ -45,12 +49,13 @@ export class ProductoTiendaController {
 
   @Put(':productoId/stores/:tiendaId')
   async updateProductFromStore(
-    @Param('tiendaId') tiendaId: string,
+    @Body() tiendaDto: TiendaDto[],
     @Param('productoId') productoId: string,
   ) {
-    return await this.productoTiendaService.updateProductFromStore(
-      tiendaId,
+    const tiendas = plainToInstance(TiendaEntity, tiendaDto);
+    return await this.productoTiendaService.updateStoresFromProduct(
       productoId,
+      tiendas,
     );
   }
 
