@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class TiendaDto {
   @IsString()
   @IsNotEmpty()
   readonly nombre: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   readonly ciudad: number;
 

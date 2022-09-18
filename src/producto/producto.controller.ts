@@ -27,7 +27,6 @@ export class ProductoController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    console.log('id desde controlador', id);
     return await this.productoService.findOne(id);
   }
 
